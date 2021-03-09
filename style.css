@@ -1,6 +1,19 @@
+
 .color {
   border: 1px solid black;
-  display: inline;
-  width: 40px;
-  height: 40px;
+  display: inline-block;
+  padding: 20px;
 }
+
+.pixel {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 20px;
+  margin: 0.8px;
+  background-color: white;
+}
+
+#pixel-board {
+  margin-top: 20px;
+}
+

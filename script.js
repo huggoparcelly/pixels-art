@@ -26,12 +26,16 @@ function selectedBlack() {
   getBlack.classList.add('selected'); // adiciona o selected na classe da cor preta
 }
 
+function changeClass(event) {
+  const getClassSelected = document.querySelector('.selected'); // captura o elemento que tem a class selected
+  getClassSelected.classList.remove('selected'); // remove a class
+  event.target.classList.add('selected'); // adiciona a class no elemento que eu clicar, referenciado na função selctedColor (getColor[color])
+}
+
 function selectedColor() {
-  const getClassColor = document.querySelectorAll('.color');
-  for (let i = 0; i < getClassColor.length; i += 1) { // interação para clicar em todos os elementos da palleta
-    getClassColor[i].addEventListener('click', function () {
-      this.classList.add('selected');
-    });
+  const getColor = document.querySelectorAll('.color'); // seleciona todos os elementos com a class color
+  for (let color = 0; color < getColor.length; color += 1) { // interação para buscar cada elemento com a class color
+    getColor[color].addEventListener('click', changeClass); // evento de click, que altera as classes, chamando a função changeClass.
   }
 }
 

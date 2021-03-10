@@ -39,8 +39,21 @@ function selectedColor() {
   }
 }
 
+function changeColorPixel(event) {
+  const getColorSelected = document.querySelector('.selected');
+  event.target.style.backgroundColor = getColorSelected.id;
+}
+
+function clickPixel() {
+  const getPixel = document.querySelectorAll('.pixel');
+  for (let i = 0; i < getPixel.length; i += 1) {
+    getPixel[i].addEventListener('click', changeColorPixel);
+  }
+}
+
 window.onload = function () {
   createAllPixel();
   selectedBlack();
   selectedColor();
+  clickPixel();
 };

@@ -12,15 +12,51 @@ function createLine() {
 
 const size = 5;
 
-function createAllPixel() {
+function createAllPixel(newSize) {
   const pixelBox = document.querySelector('#pixel-board'); // captura o quadro completo
-  for (let l = 0; l < size; l += 1) {
+  for (let l = 0; l < newSize; l += 1) {
     pixelBox.appendChild(createLine());
-    for (let pixel = 0; pixel < size; pixel += 1) {
+    for (let pixel = 0; pixel < newSize; pixel += 1) {
       const getLine = document.querySelectorAll('.line');
       getLine[l].appendChild(createPixel());
     }
   }
+}
+
+function changeColorPixel(event) {
+  const getColorSelected = document.querySelector('.selected'); // o elemento que contem selected
+  event.target.style.backgroundColor = getColorSelected.id; // muda a cor para o pixel clicado
+}
+
+function clickPixel() {
+  const getPixel = document.querySelectorAll('.pixel'); // captura todos os pixels
+  for (let i = 0; i < getPixel.length; i += 1) {
+    getPixel[i].addEventListener('click', changeColorPixel);
+  }
+}
+
+function boardSize() {
+  // capturar a inforção do input e transformar em int
+  const getInput = document.querySelector('#board-size');
+  const sizeInput = parseInt(getInput.value, 10);
+  // verificação de numero positivo e entre 5 e 50;
+  if (sizeInput < 0) {
+    alert('Digitar um valor positivo');
+  } else if (sizeInput < 5 || sizeInput > 50) {
+    alert('Digitar um valor entre 5 e 50');
+  } else if (getInput.value === '') {
+    alert('Board inválido!');
+  } else {
+    document.getElementById('pixel-board').innerHTML = ''; // apaga todos os pixels criados
+    createAllPixel(sizeInput); // cria os pixels pelo tamanho do input
+  }
+  clickPixel();
+}
+
+function btnSize() {
+  // captura o botão
+  const getBnt = document.querySelector('#generate-board');
+  getBnt.addEventListener('click', boardSize);
 }
 
 function selectedBlack() {
@@ -41,18 +77,6 @@ function selectedColor() {
   }
 }
 
-function changeColorPixel(event) {
-  const getColorSelected = document.querySelector('.selected');
-  event.target.style.backgroundColor = getColorSelected.id;
-}
-
-function clickPixel() {
-  const getPixel = document.querySelectorAll('.pixel');
-  for (let i = 0; i < getPixel.length; i += 1) {
-    getPixel[i].addEventListener('click', changeColorPixel);
-  }
-}
-
 function removeStyle() {
   // capturar o bg dos pixels
   const getPixel = document.querySelectorAll('.pixel');
@@ -70,9 +94,10 @@ function clearBtn() {
 }
 
 window.onload = function () {
-  createAllPixel();
+  createAllPixel(size);
   selectedBlack();
   selectedColor();
   clickPixel();
   clearBtn();
+  btnSize();
 };

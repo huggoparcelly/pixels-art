@@ -10,11 +10,13 @@ function createLine() {
   return lines;
 }
 
+const size = 5;
+
 function createAllPixel() {
   const pixelBox = document.querySelector('#pixel-board'); // captura o quadro completo
-  for (let l = 0; l < 5; l += 1) {
+  for (let l = 0; l < size; l += 1) {
     pixelBox.appendChild(createLine());
-    for (let pixel = 0; pixel < 5; pixel += 1) {
+    for (let pixel = 0; pixel < size; pixel += 1) {
       const getLine = document.querySelectorAll('.line');
       getLine[l].appendChild(createPixel());
     }

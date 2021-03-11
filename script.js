@@ -10,7 +10,7 @@ function createLine() {
   return lines;
 }
 
-const size = 5;
+let size = 5;
 
 function createAllPixel(newSize) {
   const pixelBox = document.querySelector('#pixel-board'); // captura o quadro completo
@@ -40,14 +40,17 @@ function boardSize() {
   const getInput = document.querySelector('#board-size');
   const sizeInput = parseInt(getInput.value, 10);
   // verificação de numero positivo e entre 5 e 50;
+  document.getElementById('pixel-board').innerHTML = ''; // apaga todos os pixels criados
   if (sizeInput < 0) {
     alert('Digitar um valor positivo');
-  } else if (sizeInput < 5 || sizeInput > 50) {
-    alert('Digitar um valor entre 5 e 50');
-  } else if (getInput.value === '') {
+  } else if (sizeInput < 5) { // se o valor for menor que 5, permanecem 5 pixels
+    createAllPixel(5);
+  } else if (sizeInput > 50) { // se o valor for maior que 50, permanecem 50 pixels
+    createAllPixel(50);
+  } else if (getInput.value === '') { 
     alert('Board inválido!');
+    createAllPixel(5);
   } else {
-    document.getElementById('pixel-board').innerHTML = ''; // apaga todos os pixels criados
     createAllPixel(sizeInput); // cria os pixels pelo tamanho do input
   }
   clickPixel();

@@ -51,9 +51,26 @@ function clickPixel() {
   }
 }
 
+function removeStyle() {
+  // capturar o bg dos pixels
+  const getPixel = document.querySelectorAll('.pixel');
+  // Interação para selecionar cada pixel
+  for (let i = 0; i < getPixel.length; i += 1) {
+    getPixel[i].removeAttribute('style');
+  }
+}
+
+function clearBtn() {
+  // capturar o botão
+  const btnClear = document.querySelector('#clear-board');
+  // evento de clique para remover o estilo de bg
+  btnClear.addEventListener('click', removeStyle);
+}
+
 window.onload = function () {
   createAllPixel();
   selectedBlack();
   selectedColor();
   clickPixel();
+  clearBtn();
 };

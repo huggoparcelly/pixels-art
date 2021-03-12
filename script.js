@@ -10,7 +10,7 @@ function createLine() {
   return lines;
 }
 
-let size = 5;
+const size = 5;
 
 function createAllPixel(newSize) {
   const pixelBox = document.querySelector('#pixel-board'); // captura o quadro completo
@@ -23,15 +23,16 @@ function createAllPixel(newSize) {
   }
 }
 
-function changeColorPixel(event) {
-  const getColorSelected = document.querySelector('.selected'); // o elemento que contem selected
-  event.target.style.backgroundColor = getColorSelected.id; // muda a cor para o pixel clicado
+function changeColor(event) {
+  const getSelected = document.querySelector('.selected'); // capturar o elemento da class selected
+  const getBgColor = window.getComputedStyle(getSelected).backgroundColor; // capturar o background
+  event.target.style.backgroundColor = getBgColor; // atribui o bg ao elemento clicado
 }
 
 function clickPixel() {
   const getPixel = document.querySelectorAll('.pixel'); // captura todos os pixels
-  for (let i = 0; i < getPixel.length; i += 1) {
-    getPixel[i].addEventListener('click', changeColorPixel);
+  for (let i = 0; i < getPixel.length; i += 1) { // iteração para poder clicar em todos os pixels
+    getPixel[i].addEventListener('click', changeColor); // evento de click para pintar o pixel
   }
 }
 
@@ -47,7 +48,7 @@ function boardSize() {
     createAllPixel(5);
   } else if (sizeInput > 50) { // se o valor for maior que 50, permanecem 50 pixels
     createAllPixel(50);
-  } else if (getInput.value === '') { 
+  } else if (getInput.value === '') {
     alert('Board inválido!');
     createAllPixel(5);
   } else {
@@ -63,8 +64,22 @@ function btnSize() {
 }
 
 function selectedBlack() {
-  const getBlack = document.getElementById('black');
+  const getBlack = document.getElementById('blackColor');
   getBlack.classList.add('selected'); // adiciona o selected na classe da cor preta
+}
+
+function generateColors() {
+  // captura a palleta de cores
+  const getPallete = document.getElementsByClassName('color');
+  // gera cores com o rbg e math.random
+  for (let i = 0; i < getPallete.length; i += 1) {
+    const randomNum1 = parseInt((Math.random() * 256), 10); // gera numeros aleatório entre 0 e 255.
+    const randomNum2 = parseInt((Math.random() * 256), 10);
+    const randomNum3 = parseInt((Math.random() * 256), 10);
+    const color = `rgb(${randomNum1}, ${randomNum2}, ${randomNum3})`; // gera as cores rgb
+    getPallete[0].style.backgroundColor = 'black';
+    getPallete[i].style.backgroundColor = color;
+  }
 }
 
 function changeClass(event) {
@@ -99,6 +114,7 @@ function clearBtn() {
 window.onload = function () {
   createAllPixel(size);
   selectedBlack();
+  generateColors();
   selectedColor();
   clickPixel();
   clearBtn();

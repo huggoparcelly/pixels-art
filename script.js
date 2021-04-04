@@ -23,10 +23,10 @@ function createAllPixel(newSize) {
   }
 }
 
-function changeColor(event) {
+function changeColor(e) {
   const getSelected = document.querySelector('.selected'); // capturar o elemento da class selected
   const getBgColor = window.getComputedStyle(getSelected).backgroundColor; // capturar o background
-  event.target.style.backgroundColor = getBgColor; // atribui o bg ao elemento clicado
+  e.target.style.backgroundColor = getBgColor; // atribui o bg ao elemento clicado
 }
 
 function clickPixel() {
@@ -111,7 +111,7 @@ function clearBtn() {
   btnClear.addEventListener('click', removeStyle);
 }
 
-window.onload = function () {
+window.onload = () => {
   createAllPixel(size);
   selectedBlack();
   generateColors();

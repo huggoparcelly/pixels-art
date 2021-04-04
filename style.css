@@ -3,13 +3,14 @@
 }
 
 body {
-  background-color:rgb(0, 176, 105);
+  background-color:rgb(238, 235, 235);
 }
 
 .color {
   border: 1px solid black;
   display: inline-block;
   padding: 20px;
+  border-radius: 50%;
 }
 
 .pixel {
